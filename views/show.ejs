@@ -1,0 +1,19 @@
+<% include partials/header %>
+ <div class="text-center">
+   <h2><%=polls.pollName%></h2>
+   <select>
+     <% polls.items.forEach(function(poll){ %>
+      <option value="<%= poll.name %>"><%= poll.name %></option>
+        <%= poll.name %>
+     <% }) %>
+   </select>
+
+
+
+   <div class='form-group'>
+          <button class='btn btn-lg btn-primary'>Submit New Poll</button>
+   </div>
+  </div>
+
+
+<% include partials/footer %>

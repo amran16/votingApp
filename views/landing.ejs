@@ -1,0 +1,15 @@
+<% include partials/header %>
+
+<div class="container text-center ">
+
+<h2>Welcome to Voting App of Free Code Camp</h2>
+
+</div>
+
+<% vote.forEach(function(x){ %>
+  <li> <%- JSON.parse(vote)  %></li>
+<% }); %>
+
+
+
+<% include partials/footer %>
