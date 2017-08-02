@@ -4,11 +4,10 @@
   <h1>Cast Your Vote Here!</h1>
   <a href="/votes/new"><strong>Add New Poll</strong></a>
   <div>
-    <% polls.forEach(function(poll){ %>
-
-       <a href="/votes/<%=poll._id%>">
-          <h3><%= poll.pollName %></h3>
+    <% votes.forEach(function(vote){ %>
+       <a href="/votes/<%=vote._id%>">
+          <h3><%= vote.pollTitle %></h3>
        </a>
    <%  });  %>
   </div>
-</div>
+</div
