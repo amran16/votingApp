@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Nightlife Coordination App</title>
+        <title>Voting App</title>
         <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet" href="/stylesheets/styles.css">
@@ -22,8 +22,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="links">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <% if(!currentUser){ %>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Sign Up</a></li>
+          <% } else { %>
+             <li><a href="#"> <%= currentUser.username %></a></li>
+             <li><a href="/logout">Logout</a></li>
+          <% } %>
            </ul>
         </div>
       </div>

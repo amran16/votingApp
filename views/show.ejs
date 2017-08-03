@@ -1,19 +1,22 @@
 
 <% include partials/header %>
- <div class="text-center">
-   <h2><%=foundVote.pollTitle%></h2>
-
-   <form action="/polls/<%= foundVote._id %>" method="post">
-        <label for="">Vote over this page</label>
-        <select name="vote">
-          <% foundVote.pollItems.forEach(function(poll){ %>
-            <option value='<%= poll.name %>'><%= poll.name %></option>
-            <% }); %>
-          </select>
-        </form>
-
-   <div class='form-group'>
-          <button class='btn btn-lg btn-primary'>Submit New Poll</button>
-   </div>
+  <div class=container>
+      <div class='row'>
+        <h2 style='text-align: center;'><%=foundVote.pollTitle%></h2>
+        <div style='width: 30%; margin:25px auto'>
+          <form action='/votes/<%= foundVote._id %>' method='POST'>
+            <label >Vote over this page</label>
+            <select name='vote'>
+              <% foundVote.pollItems.forEach(function(poll){ %>
+                <option value='<%= poll.name %>'><%= poll.name %></option>
+                <% }); %>
+              </select>
+              <div class='form-group'>
+                 <button class='btn btn-lg btn-primary btn-block'>Submit</button>
+              </div>
+          </form>
+         <button type="button" class="btn btn-primary btn-lg">Got a new option, Add here</button>
+       </div>
+     </div>
   </div>
 <% include partials/footer %>

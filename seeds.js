@@ -1,28 +1,29 @@
 const mongoose = require('mongoose'),
-      Vote     = require('./models/poll');
+          Vote = require('./models/poll'),
+          User = require('./models/user');
 
 
 var data = [
   {
-    pollName: 'Favorite City',
-    items: [
-      {name: 'Oakland', count: 3},
-      {name: 'Berkeley', count: 2},
+    pollTitle: 'Favorite City',
+    pollItems: [
+      {name: 'Oakland', count: 1},
+      {name: 'Berkeley', count: 1},
       {name: 'San Francisco', count: 1},
     ]
   },
   {
-    pollName: 'Favorite Food',
-    items: [
-      {name: 'Rice', count: 3},
-      {name: 'Pasta', count: 2},
-      {name: 'Noodle', count: 1},
+    pollTitle: 'Favorite Food',
+    pollItems: [
+      {name: 'Rice', count: 1},
+      {name: 'Sandwich', count: 1},
+      {name: 'Chiken', count: 1},
     ]
   },
   {
-    pollName: 'Favorite Drink',
-    items: [
-      {name: 'Water', count: 3},
+    pollTitle: 'Favorite Drink',
+    pollItems: [
+      {name: 'Water', count: 1},
       {name: 'Tea', count: 1},
       {name: 'Coffee', count: 1},
     ]
@@ -34,19 +35,16 @@ function seedDB(){
     if(err){
       console.log(err);
     }
-    console.log('removed votes!');
+    //console.log('removed votes!');
     data.forEach(function(seed){
-      Vote.create(seed, function(err, addedData){
+      Vote.create(seed, function(err, addedVotes){
         if(err){
           console.log(err)
         }else{
-          console.log('added: ' + seed.pollName)
+          console.log('added: ' + seed.pollTitle)
         }
       })
     });
   });
 }
-
-
-
 module.exports = seedDB;
