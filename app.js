@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express               = require('express'),
       bodyParser            = require('body-parser'),
       mongoose              = require('mongoose'),
@@ -10,8 +11,6 @@ const express               = require('express'),
       //cookieParser          = require("cookie-parser"),
       expressSanitizer      = require('express-sanitizer'),
       app                   = express();
-      
-      require('dotenv').config();
 
 seedDB();
 
@@ -142,7 +141,7 @@ app.get('/votes/:id', (req, res) => {
 
   //Add new polls to the vote
   app.post('/votes/:id', (req, res) => {
-    const vote = req.body.vote;
+    const ballot = req.body.ballot;
     const id  = req.params.id;
     const pollArray = [];
     // console.log(req.params.id);
@@ -152,18 +151,16 @@ app.get('/votes/:id', (req, res) => {
         console.log(err);
       } else {
         for(var i = 0; i < foundVote.pollItems.length; i++){
-          if(foundVote.pollItems[i].name === vote){
+          if(foundVote.pollItems[i].name === ballot){
              foundVote.pollItems[i].count += 1;
              foundVote.save();
           }
           pollArray.push([foundVote.pollItems[i].name, foundVote.pollItems[i].count]);
         }
-        console.log(pollArray);
+        //console.log(pollArray);
         res.redirect('/votes/' + id);
       }
-
     })
-
     //res.send('vote submitted?');
   });
 

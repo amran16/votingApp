@@ -1,12 +1,18 @@
 
 <% include partials/header %>
+
+<% var test = (foundVote); %>
+<% var newArray = foundVote; %>
+<% var id = foundVote._id.toString(); %>
+
+
   <div class=container>
       <div class='row'>
         <h2 style='text-align: center;'><%=foundVote.pollTitle%></h2>
         <div style='width: 30%; margin:25px auto'>
           <form action='/votes/<%= foundVote._id %>' method='POST'>
             <label >Vote over this page</label>
-            <select name='vote'>
+            <select name='ballot'>
               <% foundVote.pollItems.forEach(function(poll){ %>
                 <option value='<%= poll.name %>'><%= poll.name %></option>
                 <% }); %>
@@ -19,4 +25,39 @@
        </div>
      </div>
   </div>
+
+  <div class="col-lg-10 col-md-10  show-canvas" >
+      <canvas id="showChart"></canvas>
+  </div>
+
+   <script type='text/javascript'>
+      var foundVote = <%- JSON.stringify(test)%>;
+      var newArray = <%- JSON.stringify(newArray) %>;
+      function randomNumber(){
+      return Math.floor(Math.random() * 256);
+      }
+      var backColor = [];
+      var labels = [];
+      var howMany = [];
+      for(var i = 0 ; i < newArray.length; i ++){
+
+      labels.push(newArray[i][0]);
+      howMany.push(newArray[i][1]);
+      backColor.push('rgba('+randomNumber()+', '+ randomNumber()+ ', ' + randomNumber()+', 0.8)');
+      }
+      var ctx = document.getElementById("showChart");
+      var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+         labels: labels,
+         datasets: [{
+             label: '# of Votes',
+             data: howMany,
+             backgroundColor: backColor,
+             borderColor: backColor,
+             borderWidth: 1
+         }]
+      }
+      });
+  </script>
 <% include partials/footer %>

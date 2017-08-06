@@ -1,4 +1,19 @@
+body{
+  
+}
+
 select{
   width: 100%;
   margin-bottom: 2px;
+}
+
+
+#showChart{
+  width: 800 ;
+  height: 800 ;
+}
+
+#myChart{
+  width: 100% !important;
+  height: 100% !important;
 }
