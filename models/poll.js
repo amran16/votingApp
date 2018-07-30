@@ -1,10 +1,23 @@
 const mongoose = require('mongoose');
 
 var votingSchema = new mongoose.Schema({
-  
-   pollTitle: String,
-   pollItems: [{name: String, count: Number}]
 
+   pollTitle: String,
+   dateCreated: {type: Date, default: Date.now},
+   pollItems: [
+      {
+        name: String,
+        count: Number
+      }
+    ],
+
+   author: {
+     id: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: 'User'
+     },
+     username: String
+   }
 });
 
 

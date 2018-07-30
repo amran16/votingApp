@@ -3,14 +3,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
    username: String,
-   password: String,
-   ballots: [
-     {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: 'Vote'
-      }
-   ]
-
+   password: String
 });
 
 userSchema.plugin(passportLocalMongoose);

@@ -1,19 +1,19 @@
-body{
-  
+
+i.icon {
+    font-size: 2em;
 }
 
-select{
-  width: 100%;
-  margin-bottom: 2px;
+div.field.inline > input {
+  width: 90% !important;
 }
 
-
-#showChart{
-  width: 800 ;
-  height: 800 ;
+.flash{
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-#myChart{
-  width: 100% !important;
-  height: 100% !important;
+.horizontal.divider {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }

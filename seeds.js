@@ -30,21 +30,21 @@ var data = [
   }
 ]
 
-function seedDB(){
-  Vote.remove({}, function(err){
+seedDB = () => {
+  Vote.remove({}, (err) => {
     if(err){
       console.log(err);
     }
-    //console.log('removed votes!');
-    data.forEach(function(seed){
-      Vote.create(seed, function(err, addedVotes){
-        if(err){
-          console.log(err)
-        }else{
-          console.log('added: ' + seed.pollTitle)
-        }
-      })
-    });
+    console.log('removed votes!');
+    // data.forEach(seed => {
+    //   Vote.create(seed, (err, addedVotes) => {
+    //     if(err){
+    //       console.log(err)
+    //     }else{
+    //       console.log('added: ' + seed.pollTitle)
+    //     }
+    //   })
+    // });
   });
 }
 module.exports = seedDB;
