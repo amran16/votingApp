@@ -1,11 +1,11 @@
-const express = require("express"),
-      router  = express.Router(),
-      Vote    = require('../models/poll'),
-      middleware  = require("../middleware"),
+const express    = require("express"),
+      router     = express.Router(),
+      Vote       = require('../models/poll'),
+      middleware = require("../middleware"),
       moment     = require('moment');
 
 //Index Route - Show all polls
-router.get('/polls', (req, res) => {
+router.get('/', (req, res) => {
   //console.log('The user from get/polls: ',req.user); //it contains all the logged in info
   //res.send('hello there')
    Vote.find({}, function(err, allPolls){
@@ -20,12 +20,12 @@ router.get('/polls', (req, res) => {
 });
 
 //New Route - Show form to create a new vote
-router.get('/polls/new', middleware.isLoggedIn, (req, res) =>{
+router.get('/new', middleware.isLoggedIn, (req, res) =>{
   res.render('polls/new');
 });
 
 //Creat Route - add new vote to DB
-router.post('/polls', (req, res) => {
+router.post('/', (req, res) => {
    //get data from form and add to vote array
    //redirect back to votes page
    const pollName = req.body.pollName;
@@ -38,7 +38,7 @@ router.post('/polls', (req, res) => {
    }
 
    const pollData = pollOption.map(item => {
-      return { name: item, count:1 }
+      return { name: item, count: 1 }
    })
 
    const newVotes = {
@@ -60,12 +60,9 @@ router.post('/polls', (req, res) => {
 
 
 // Show Route - Shows more info about one vote
-router.get('/polls/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   var id = req.params.id
   //console.log("The show ID:",id)
-  //find the vote with provided ID in mongoDB
-  //it doesn't have to be :id, it could be anything, like name, thing...
-
    Vote.findById(req.params.id).exec((err, foundVote) => {
      if(err){
        console.log(err);
@@ -78,7 +75,7 @@ router.get('/polls/:id', (req, res) => {
 });
 
 //Vote Route
-router.post("/polls/:id", (req, res) => {
+router.post("/:id", (req, res) => {
   // console.log("The post ID:", req.params.id);
   // console.log("Post Updated Poll:", req.body);
   // console.log("Voted Item:", req.body.item);
@@ -98,7 +95,7 @@ router.post("/polls/:id", (req, res) => {
 });
 
 // Edit Poll
-router.get('/polls/:id/edit', middleware.checkPollOwnership, (req, res, next) => {
+router.get('/:id/edit', middleware.checkPollOwnership, (req, res, next) => {
     Vote.findById(req.params.id, (err, foundVote) => {
         if (err) return next(err);
         res.render('polls/edit', { poll: foundVote });
@@ -106,39 +103,11 @@ router.get('/polls/:id/edit', middleware.checkPollOwnership, (req, res, next) =>
     });
 });
 
-// router.get('/polls/:id/edit', (req, res) => {
-//   if(req.isAuthenticated()){
-//       Vote.findById(req.params.id, (err, foundVote) => {
-//         if(err){
-//           res.redirect('/polls');
-//         }else {
-//           console.log('The author is: ', foundVote.author.id); //its a moongo object
-//           console.log('The currentUser is: ', req.user._id);
-//           if(foundVote.author.id.equals(req.user._id)){
-//             res.render('polls/edit', { poll: foundVote });
-//           }else{
-//             res.send('You do not have permission to do that!');
-//           }
-//         }
-//     });
-//   }else{
-//     //console.log('You need to be logged in to do that');
-//     res.send('You need to be logged in to do that')
-//   }
-//
-//     Vote.findById(req.params.id, (err, foundVote) => {
-//       if(err){
-//         res.redirect('/polls');
-//       }else {
-//         res.render('polls/edit', { poll: foundVote });
-//       }
-//     });
-// });
-
 //Update poll
-router.put('/polls/:id/edit', (req, res, next) => {
-  // console.log("PUT Updated ID:", req.params);
-  // console.log("PUT Updated Poll:", req.body.poll);
+router.put('/:id/edit', (req, res, next) => {
+  console.log("the updated Id:", req.params.id);
+  console.log("the req.body is :", req.body);
+  console.log("the updated poll:", req.body.poll);
   Vote.findByIdAndUpdate(req.params.id, req.body.poll, (err, updatedPoll) => {
     if (err) return next(err);
       res.redirect('/polls');
@@ -146,7 +115,7 @@ router.put('/polls/:id/edit', (req, res, next) => {
 })
 
 //Delete poll
-router.delete('/polls/:id', middleware.checkPollOwnership, (req, res, next) => {
+router.delete('/:id', middleware.checkPollOwnership, (req, res, next) => {
   Vote.findByIdAndRemove(req.params.id, err => {
       if (err) return next(err);
       res.redirect('/polls');

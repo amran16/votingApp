@@ -28,14 +28,9 @@ const votingRoutes = require('./routes/polls');
 
 //mongoose connections
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://voting:vote123@ds127173.mlab.com:27173/votingproject', {
-//     keepAlive: true
-// });
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting", {
     keepAlive: true
 });
-//mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting");
-//mongoose.connect("mongodb://localhost/voting");
 
 
 app.set('view engine', 'ejs');
@@ -43,7 +38,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(flash());
-// app.use(cookieParser());
+
 
 //Passort and Session
 app.use(expressSession({
@@ -70,9 +65,7 @@ app.use(function(req, res, next){
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_SECRET,
-  callbackURL:  'http://localhost:7000/user/signin/callback'
-  //'https://votingApp.herokuapp.com/auth/callback'
-
+  callbackURL:  'https://wannavoteapp.herokuapp.com/'
  },
  function(accessToken, refreshToken, profile, done){
    User.findOne({ githubId: profile.username}, function(err, user){
@@ -95,7 +88,7 @@ passport.use(new GitHubStrategy({
 
 //express routes
 app.use(authentication);
-app.use(votingRoutes);
+app.use('/polls', votingRoutes);
 
 //Server Setup
 app.listen(PORT, () => {
