@@ -28,6 +28,9 @@ const votingRoutes = require('./routes/polls');
 
 //mongoose connections
 mongoose.Promise = global.Promise;
+// mongoose.connect('mongodb://voting:vote123@ds127173.mlab.com:27173/votingproject', {
+//     keepAlive: true
+// });
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting", {
     keepAlive: true
 });
