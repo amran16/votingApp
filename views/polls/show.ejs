@@ -1,51 +1,42 @@
 <% include ../partials/header %>
-    <div class="page-content show">
-        <div class="ui container text">
 
+  <div class="ui container text">
+    <div class="ui container text">
+      <h2 class="ui header teal dividing center aligned">
+          <%= votes.pollTitle %>
+      </h2>
+      <div class="ui grid container show">
+        <div class="ten wide column">
+          <canvas id="chart" width="400" height="400"></canvas>
         </div>
-
-        <div class="ui container text">
-            <h2 class="ui header teal dividing center aligned">
-                <%= votes.pollTitle %>
-            </h2>
-            <div class="ui relaxed grid container text">
-              <div class="ten wide column">
-                  <canvas id="chart" width="400" height="400"></canvas>
-              </div>
-                <div class="voting-box six wide column">
-                    <h3 class="ui header violet">
-                        Voting Option:
-                    </h3>
-                    <form class="ui form" action="/polls/<%= votes._id %>?_method=POST" method="POST">
-                        <div class="grouped fields">
-                            <% votes.pollItems.map(item => { %>
-                                <div class="field">
-                                    <div class="ui radio checkbox">
-                                        <input type="radio" name="item" tabindex="0"  value="<%- item._id %>">
-                                        <label>
-                                            <%= item.name %>
-                                        </label>
-                                    </div>
-                                </div>
-                                <% }) %>
-                        </div>
-                        <button type="submit" class="ui button teal">Vote</button>
-                    </form>
+        <div class="five wide column voting">
+          <h3 class="ui header teal">
+            Voting Option:
+          </h3>
+          <form class="ui form" action="/polls/<%= votes._id %>?_method=POST" method="POST">
+            <div class="grouped fields">
+              <% votes.pollItems.map(option => { %>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="option" tabindex="0"  value="<%- option._id %>">
+                    <label><%= option.name %></label>
+                  </div>
                 </div>
-                <a href="/polls" class="ui teal button">
-                    Back to the polls
-                </a>
+              <% }) %>
             </div>
+           <button type="submit" class="ui button teal">Vote</button>
+          </form>
         </div>
+       <a href="/polls" class="ui teal button"> Back to the polls</a>
+      </div>
     </div>
+
     <script>
         const votes = <%- JSON.stringify(votes) %>;
 
         //console.log('the poll is: ', polls)
 
         const labelList = votes.pollItems.map(item => item.name);
-
-        //console.log(labelList)
 
         const pollCount = votes.pollItems.map(item => item.count);
         var ctx = document.getElementById("chart");

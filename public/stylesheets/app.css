@@ -17,3 +17,12 @@ div.field.inline > input {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
+
+div.voting{
+  margin-top: 5rem;
+  margin-left: 2rem;
+}
+
+.ui.show{
+  margin-top: 2rem;
+}

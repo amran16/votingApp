@@ -1,8 +1,8 @@
 const express    = require("express"),
       router     = express.Router(),
       Vote       = require('../models/poll'),
-      middleware = require("../middleware"),
-      moment     = require('moment');
+      middleware = require("../middleware");
+
 
 //Index Route - Show all polls
 router.get('/', (req, res) => {
@@ -80,7 +80,7 @@ router.post("/:id", (req, res) => {
   // console.log("Post Updated Poll:", req.body);
   // console.log("Voted Item:", req.body.item);
 
-  const votedItem = req.body.item;
+  const votedItem = req.body.option;
   Vote.updateOne(
     { "pollItems._id": votedItem },
     {
@@ -105,9 +105,9 @@ router.get('/:id/edit', middleware.checkPollOwnership, (req, res, next) => {
 
 //Update poll
 router.put('/:id/edit', (req, res, next) => {
-  console.log("the updated Id:", req.params.id);
-  console.log("the req.body is :", req.body);
-  console.log("the updated poll:", req.body.poll);
+  // console.log("the updated Id:", req.params.id);
+  // console.log("the req.body is :", req.body);
+  // console.log("the updated poll:", req.body.poll);
   Vote.findByIdAndUpdate(req.params.id, req.body.poll, (err, updatedPoll) => {
     if (err) return next(err);
       res.redirect('/polls');
