@@ -28,7 +28,7 @@ const votingRoutes = require('./routes/polls');
 
 //mongoose connections
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting", {
     keepAlive: true
 });
 //mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting");
