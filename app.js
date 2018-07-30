@@ -65,7 +65,7 @@ app.use(function(req, res, next){
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_SECRET,
-  callbackURL:  'https://wannavoteapp.herokuapp.com/'
+  callbackURL:  'https://wannavoteapp.herokuapp.com/user/signin/callback'
  },
  function(accessToken, refreshToken, profile, done){
    User.findOne({ githubId: profile.username}, function(err, user){
