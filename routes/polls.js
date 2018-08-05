@@ -46,9 +46,7 @@ router.post('/', (req, res) => {
      pollItems: pollData,
      author: author
    }
-
    //console.log(newVotes);
-
    Vote.create(newVotes, (err, newlyCreated) => {
      if(err){
        console.log(err);
