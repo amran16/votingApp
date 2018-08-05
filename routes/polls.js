@@ -1,7 +1,7 @@
-const express    = require("express"),
+const express    = require('express'),
       router     = express.Router(),
       Vote       = require('../models/poll'),
-      middleware = require("../middleware");
+      middleware = require('../middleware');
 
 
 //Index Route - Show all polls
@@ -75,16 +75,16 @@ router.get('/:id', (req, res) => {
 });
 
 //Vote Route
-router.post("/:id", (req, res) => {
+router.post('/:id', (req, res) => {
   // console.log("The post ID:", req.params.id);
   // console.log("Post Updated Poll:", req.body);
   // console.log("Voted Item:", req.body.item);
 
   const votedItem = req.body.option;
   Vote.updateOne(
-    { "pollItems._id": votedItem },
+    { 'pollItems._id': votedItem },
     {
-      $inc: { "pollItems.$.count": 1 }
+      $inc: { 'pollItems.$.count': 1 }
     },
 
     (err, updatedPoll) => {

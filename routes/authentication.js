@@ -1,10 +1,10 @@
-const express               = require("express"),
+const express               = require('express'),
       router                = express.Router(),
-      passport              = require("passport"),
-      User                  = require("../models/user");
+      passport              = require('passport'),
+      User                  = require('../models/user');
 
 //root route
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
     res.redirect('/polls');
 });
 
@@ -19,12 +19,12 @@ router.post('/register', (req, res) => {
     User.register(newUser, req.body.password, (err, user) => {
       if(err){
       //  console.log(err);
-        req.flash("error", err.message);
-        res.redirect("/register");
+        req.flash('error', err.message);
+        res.redirect('/register');
         //return res.render('register');
       }
       passport.authenticate('local')(req, res, () => {
-        req.flash("success", "Successfully Signed Up! Welcome " + req.body.username);
+        req.flash('success', 'Successfully Signed Up! Welcome ' + req.body.username);
         res.redirect('/polls');
         //res.send('You are in')
       });
@@ -44,11 +44,10 @@ router.post('/signin', passport.authenticate('local',
       })
 );
 
-
 // logout route
 router.get('/signout', (req, res) => {
      req.logout();
-     req.flash("success", "You are logged out");
+     req.flash('success', 'You are logged out');
      res.redirect('/polls');
 });
 

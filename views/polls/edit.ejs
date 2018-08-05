@@ -1,25 +1,21 @@
 <% include ../partials/header %>
 
-	<div class="edit">
-		<div class="ui text container">
-			<h1 class="ui header teal dividing center aligned">Edit Poll</h1>
-			<div class="ui container">
-				<form class="ui form" action="/polls/<%= poll._id %>/edit?_method=PUT" method="POST">
-					<h4 class="ui dividing header">Question</h4>
-					<div class="field required">
-						<input type="text" name="poll[pollTitle]" value="<%=poll.pollTitle %>">
-					</div>
-					<h4 class="ui dividing header">Options</h4>
-					<% poll.pollItems.map((item , i) => { %>
-						<div class="field required">
-							<input type="text" name="poll[pollItems][<%= i %>][name]" value="<%= item.name %>">
-						</div>
-						<% }) %>
-							<input class="ui button teal" type="submit">
-
-				</form>
-				<a href="/polls">Back</a>
+ <div class='ui text container'>
+  <h1 class='ui header teal dividing center aligned'>Edit Poll</h1>
+	<div class='ui container'>
+	 <form class='ui form' action='/polls/<%= poll._id %>/edit?_method=PUT' method='POST'>
+	  <h4 class='ui dividing header'>Question</h4>
+		<input type='text' name='poll[pollTitle]' value='<%=poll.pollTitle %>'>
+	  <h4 class='ui dividing header'>Options</h4>
+	    <% poll.pollItems.map((item , i) => { %>
+			<div class='field required'>
+			  <input type='text' name='poll[pollItems][<%= i %>][name]' value='<%= item.name %>'>
 			</div>
+			<% }) %>
+			<input class='ui button teal' type='submit'>
+	 </form>
+	 <a href='/polls'>Back</a>
 	</div>
+ </div>
 
 <% include ../partials/footer %>

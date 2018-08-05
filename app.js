@@ -2,19 +2,17 @@ require('dotenv').config()
 const express               = require('express'),
       bodyParser            = require('body-parser'),
       mongoose              = require('mongoose'),
-      flash                 = require("connect-flash"),
-      expressSession        = require("express-session"),
-      passport              = require("passport"),
-      LocalStrategy         = require("passport-local"),
-      GitHubStrategy        = require("passport-github"),
-      methodOverride        = require("method-override"),
+      flash                 = require('connect-flash'),
+      expressSession        = require('express-session'),
+      passport              = require('passport'),
+      LocalStrategy         = require('passport-local'),
+      GitHubStrategy        = require('passport-github'),
+      methodOverride        = require('method-override'),
       app                   = express();
-
-const Chart = require("chart.js");
 
 const PORT = process.env.PORT || 7000;
 
-//const seedDB = require("./seeds");
+//const seedDB = require('./seeds');
 //seedDB();
 
 //model imports
@@ -28,7 +26,7 @@ const votingRoutes = require('./routes/polls');
 
 //mongoose connections
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting", {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/voting', {
     keepAlive: true
 });
 
@@ -36,13 +34,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/voting", {
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 app.use(flash());
 
 
 //Passort and Session
 app.use(expressSession({
-   secret: "This is the voting app",
+   secret: 'why do we need it',
    resave: false,
    saveUninitialized: false
 }));
@@ -56,8 +54,8 @@ passport.deserializeUser(User.deserializeUser());
 //This is a middleware that will run on every template
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
-   res.locals.error = req.flash("error");
-   res.locals.success = req.flash("success");
+   res.locals.error = req.flash('error');
+   res.locals.success = req.flash('success');
    next();
 });
 
