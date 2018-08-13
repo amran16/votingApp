@@ -21,9 +21,9 @@
                <div class='ui segment'>
                <% if(currentUser && item.author.id.equals(currentUser._id)) { %>
                    <form action='/polls/<%= item._id %>?_method=Delete' method='Post'>
-                     <button class='ui button orange right floated'>Delete</button>
+                     <button class='ui button orange right floated'>Delete Poll</button>
                    </form>
-                   <a href='/polls/<%= item._id %>/edit' class='ui button teal'>Edit</a>
+                   <a href='/polls/<%= item._id %>/edit' class='ui large button teal'>Edit Poll</a>
                  <% } %>
               </div>
              </div>

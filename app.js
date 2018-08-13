@@ -90,5 +90,5 @@ app.use('/polls', votingRoutes);
 
 //Server Setup
 app.listen(PORT, () => {
-  console.log(`Serving starting on ${PORT}`);
+  console.log(`Server starting on ${PORT}`);
 })
