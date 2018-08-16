@@ -1,0 +1,34 @@
+
+<% include ../partials/header %>
+    
+        <div class='ui container text'>
+            <h1 class='ui large header dividing teal center aligned'>
+                Polls
+                <div class='sub header'>
+                    <h3>Register To Create New Polls, Edit Or Delete</h3>
+                </div>
+            </h1>
+
+           <% votes.map(item => { %>
+             <div class='ui piled segments'>
+               <div class='ui segment'>
+                 <h2 class='header'><%= item.pollTitle %></h2>
+                   <div><h7>Created by <%= item.author.username %>  on <%= item.dateCreated.toDateString() %><h7></div>
+               </div>
+               <div class='ui segment'>
+                 <a href='/polls/<%= item._id %>' class='ui button teal'>View Polls</a>
+               </div>
+               <div class='ui segment'>
+               <% if(currentUser && item.author.id.equals(currentUser._id)) { %>
+                   <form action='/polls/<%= item._id %>?_method=Delete' method='Post'>
+                     <button class='ui button orange right floated'>Delete Poll</button>
+                   </form>
+                   <a href='/polls/<%= item._id %>/edit' class='ui large button teal'>Edit Poll</a>
+                 <% } %>
+              </div>
+             </div>
+
+            <% }) %>
+        </div>
+
+<% include ../partials/footer %>

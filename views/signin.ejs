@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+  <div class="ui container text">
+   <div style='width: 50%; margin:25px auto'>
+    <h1 class="ui header teal dividing center aligned">Sign In</h1>
+    <div class="ui container">
+      <form class="ui form" action="/signin" method="post">
+          <div class="field required">
+            <input required  type="text" name="username" placeholder="Username">
+          </div>
+          <div class="field required">
+            <input required type="password" name="password" placeholder="Password">
+          </div>
+
+           <div class="ui hidden divider"></div>
+           <div class="ui header">
+             <button class="fluid ui teal button">Sign In</button>
+           </div>
+
+        </form>
+          <div class="ui horizontal divider">Or Sign In with github</div>
+
+        <div class="form-fields">
+           <a href="user/signin/callback" class="fluid ui teal button"><i class="github icon"></i> Sign in with github</a>
+        </div>
+    </div>
+    </div>
+</div>
+
+<% include partials/footer %>

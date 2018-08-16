@@ -1,0 +1,32 @@
+
+i.icon {
+    font-size: 2em;
+}
+
+div.field.inline > input {
+  width: 92% !important;
+}
+
+.flash{
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.horizontal.divider {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+div.voting{
+  margin-top: 5rem;
+  margin-left: 2rem;
+}
+
+.ui.show{
+  margin-top: 2rem;
+}
+
+.item {
+  font-size: 17px;
+}
