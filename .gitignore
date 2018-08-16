@@ -1,5 +1,5 @@
-node_modules
-npm-debug.log.87109092
+/node_modules
+npm-debug.log
+*.log
 .env
-
 
